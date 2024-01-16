@@ -13,6 +13,9 @@ using System.Net;
 using API_RecrutareInterna.Repositories.Interfaces;
 using static API_RecrutareInterna.Helpers.ErrorMessageEnum;
 using API_RecrutareInterna.Helpers;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace API_RecrutareInterna.Controllers
 {
@@ -137,6 +140,8 @@ namespace API_RecrutareInterna.Controllers
         }
 
         // DELETE: api/JobsItems/5
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [Authorize]
         [HttpDelete("{id}")]
 
         public async Task<IActionResult> Delete([FromRoute] Guid id, [FromBody] JobsItem job)
